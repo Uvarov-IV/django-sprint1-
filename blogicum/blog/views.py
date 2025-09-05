@@ -57,12 +57,14 @@ def index(request):
 
 
 def post_detail(request, post_id):
+    # Получаем пост напрямую из словаря
     post = posts_dict[post_id]
     return render(
-            request,
-            'blog/detail.html',
-            {'post': post}
-        )
+        request,
+        'blog/detail.html',
+        {'post': post}
+    )
+
 
 def category_posts(request, category_slug):
     return render(
