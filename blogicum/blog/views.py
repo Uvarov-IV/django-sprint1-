@@ -44,6 +44,9 @@ posts = [
 ]
 
 
+posts_dict = {post['id']: post for post in posts}
+
+
 def index(request):
     reversed_posts = list(reversed(posts))
     return render(
@@ -54,17 +57,12 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    post = None
-    for p in posts:
-        if p['id'] == post_id:
-            post = p
-            break
+    post = posts_dict[post_id]
     return render(
-        request,
-        'blog/detail.html',
-        {'post': post}
-    )
-
+            request,
+            'blog/detail.html',
+            {'post': post}
+        )
 
 def category_posts(request, category_slug):
     return render(
