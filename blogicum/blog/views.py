@@ -59,7 +59,7 @@ def index(request):
 
 def post_detail(request, post_id):
     if post_id not in posts_by_id:
-        raise Http404('Post not found')  
+        raise Http404('Post not found')
     post = posts_by_id[post_id]
     return render(
         request,
