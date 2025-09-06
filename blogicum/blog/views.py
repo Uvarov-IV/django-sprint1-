@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 
 posts = [
     {
@@ -44,7 +45,7 @@ posts = [
 ]
 
 
-posts_dict = {post['id']: post for post in posts}
+posts_by_id = {post['id']: post for post in posts}
 
 
 def index(request):
@@ -57,8 +58,10 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    # Получаем пост напрямую из словаря
-    post = posts_dict[post_id]
+    if post_id not in posts_by_id:
+        raise Http404('Post not found')
+    
+    post = posts_by_id[post_id]
     return render(
         request,
         'blog/detail.html',
